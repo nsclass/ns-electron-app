@@ -10,7 +10,7 @@ const App = () => {
         <span css={css`color: red`}>Hello</span> World
       </h1>
       <p className="subtitle">
-        My first website with <strong>Bulma</strong>!
+        Nam's electron application <strong>template</strong>!
       </p>
     </div>
   </section>

@@ -36,4 +36,9 @@ module.exports = [
     exclude: /(node_modules|.webpack)/,
     use: "babel-loader",
   },   
+  {
+    test: /\.js$/,
+    use: ["source-map-loader"],
+    enforce: "pre"
+  },
 ];

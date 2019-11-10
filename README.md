@@ -9,12 +9,13 @@ $ yarn create electron-app ns-electron-app --template=webpack
 ```
 - Install required packages
 ```
-yarn add --dev babel-loader @babel/core @babel/preset-react @babel/preset-typescript typescript
-yarn add react react-dom
-
+yarn add --dev babel-loader @babel/core @babel/preset-react @babel/preset-typescript @babel/preset-env typescript
+yarn add --dev source-map-loader
 yarn add --dev babel-plugin-emotion
 yarn add --dev @emotion/babel-preset-css-prop
-yarn add --dev @types/react
+yarn add --dev @types/react @types/webpack-env
+
+yarn add react react-dom
 yarn add @emotion/core
 ```
 - Modify webpack.rules.js to use babel-loader for type script files
@@ -24,7 +25,11 @@ yarn add @emotion/core
     exclude: /(node_modules|.webpack)/,
     use: "babel-loader",
   },   
-
+  {
+    test: /\.js$/,
+    use: ["source-map-loader"],
+    enforce: "pre"
+  },
 ```
 - Update webpack.renderer.config.js
 ```
@@ -42,7 +47,10 @@ module.exports = {
 ```
 {
     "plugins": ["emotion"],
-    "presets": ["@babel/preset-react", "@babel/preset-typescript", "@emotion/babel-preset-css-prop"],
+    "presets": ["@babel/preset-react", 
+        "@babel/preset-typescript", 
+        "@emotion/babel-preset-css-prop",
+        ["@babel/env", { "modules": false }]]
 }
 ```
 
