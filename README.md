@@ -13,7 +13,7 @@ yarn add --dev babel-loader @babel/core @babel/preset-react @babel/preset-typesc
 yarn add --dev source-map-loader
 yarn add --dev babel-plugin-emotion
 yarn add --dev @emotion/babel-preset-css-prop
-yarn add --dev @types/react @types/webpack-env
+yarn add --dev @types/react @types/react-dom @types/webpack-env
 
 yarn add react react-dom
 yarn add @emotion/core
