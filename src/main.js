@@ -14,6 +14,10 @@ const createWindow = () => {
   mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
+    webPreferences: {
+      nodeIntegration: true,
+      webSecurity: false
+    }
   });
 
   // and load the index.html of the app.
@@ -53,5 +57,16 @@ app.on('activate', () => {
   }
 });
 
+app.on(
+  "certificate-error",
+  (event, webContents, url, error, certificate, callback) => {
+    // On certificate error we disable default behaviour (stop loading the page)
+    // and we then say "it is all fine - true" to the callback
+    event.preventDefault();
+    callback(true);
+  }
+);
+
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
+
