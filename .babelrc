@@ -1,5 +1,9 @@
 {
-    "plugins": ["emotion"],
+    "plugins": ["emotion", ["@babel/plugin-transform-runtime",
+        {
+          "regenerator": true
+        }
+      ]],
     "presets": ["@babel/preset-react", 
         "@babel/preset-typescript", 
         "@emotion/babel-preset-css-prop",
