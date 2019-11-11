@@ -181,3 +181,26 @@ ReactDOM.render(<App />, document.getElementById("root"));
     }
 }
 ```
+- Update main.js to alllow to access the self signed WEB API
+```
+app.on(
+  "certificate-error",
+  (event, webContents, url, error, certificate, callback) => {
+    // On certificate error we disable default behaviour (stop loading the page)
+    // and we then say "it is all fine - true" to the callback
+    event.preventDefault();
+    callback(true);
+  }
+);
+```
+- Update main.js to disable CORS and allow to use Node featre in a renderer process
+```
+  mainWindow = new BrowserWindow({
+    width: 800,
+    height: 600,
+    webPreferences: {
+      nodeIntegration: true,
+      webSecurity: false
+    }
+  });
+```
