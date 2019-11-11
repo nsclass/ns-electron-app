@@ -14,6 +14,8 @@ yarn add --dev source-map-loader
 yarn add --dev babel-plugin-emotion
 yarn add --dev @emotion/babel-preset-css-prop
 yarn add --dev @types/react @types/react-dom @types/webpack-env
+yarn add --dev @babel/plugin-transform-runtime
+yarn add @babel/runtime
 
 yarn add react react-dom
 yarn add @emotion/core
@@ -67,7 +69,11 @@ module.exports = {
 - Create .babelrc file
 ```
 {
-    "plugins": ["emotion"],
+    "plugins": ["emotion", ["@babel/plugin-transform-runtime",
+      {
+        "regenerator": true
+      }
+    ]],
     "presets": ["@babel/preset-react", 
         "@babel/preset-typescript", 
         "@emotion/babel-preset-css-prop",
