@@ -1,11 +1,19 @@
 {
-    "plugins": ["emotion", ["@babel/plugin-transform-runtime",
-        {
-          "regenerator": true
-        }
-      ]],
-    "presets": ["@babel/preset-react", 
-        "@babel/preset-typescript", 
-        "@emotion/babel-preset-css-prop",
-        ["@babel/env", { "modules": false }]]
+    "plugins": [
+        "@babel/proposal-class-properties",
+        "@babel/proposal-object-rest-spread",
+        "emotion",
+        [
+            "@babel/plugin-transform-runtime",
+            {
+                "regenerator": true
+            }
+        ]
+    ],
+    "presets": [
+        "@babel/env",
+        "@babel/typescript",
+        "@babel/preset-react",
+        "@emotion/babel-preset-css-prop"
+    ]
 }

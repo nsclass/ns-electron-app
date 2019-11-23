@@ -1,39 +1,50 @@
 # ns-electron-app
+
 Electron application with react, typescript and emotion CSS setup
 
-
 ## Steps
--  Create an electron app with electron forge
+
+-   Create an electron app with electron forge
+
 ```
 $ yarn create electron-app ns-electron-app --template=webpack
 ```
-- Install required packages
+
+-   Install required packages
+
 ```
-yarn add --dev babel-loader @babel/core @babel/preset-react @babel/preset-typescript @babel/preset-env typescript
+yarn add --dev babel-loader @babel/core @babel/preset-react
 yarn add --dev source-map-loader
 yarn add --dev babel-plugin-emotion
 yarn add --dev @emotion/babel-preset-css-prop
 yarn add --dev @types/react @types/react-dom @types/webpack-env
 yarn add --dev @babel/plugin-transform-runtime
-yarn add @babel/runtime
+yarn add --dev typescript @babel/core @babel/cli
+yarn add --dev @babel/plugin-proposal-class-properties @babel/plugin-proposal-object-rest-spread
+yarn add --dev @babel/preset-env @babel/preset-typescript @babel/plugin-proposal-numeric-separator
 
+yarn add @babel/runtime
 yarn add react react-dom
 yarn add @emotion/core
 ```
-- Modify webpack.rules.js to use babel-loader for type script files
+
+-   Modify webpack.rules.js to use babel-loader for type script files
+
 ```
   {
     test: /\.(js|jsx|ts|tsx)$/,
     exclude: /(node_modules|.webpack)/,
     use: "babel-loader",
-  },   
+  },
   {
     test: /\.js$/,
     use: ["source-map-loader"],
     enforce: "pre"
   },
 ```
-- Update webpack.renderer.config.js
+
+-   Update webpack.renderer.config.js
+
 ```
 module.exports = {
   // Put your normal webpack config below here
@@ -42,10 +53,12 @@ module.exports = {
   },
   resolve: {
     extensions: [".ts", ".tsx", ".js", ".jsx", ".json"],
-  },  
+  },
 };
 ```
-- Update package.json for plugins section. js should use App.tsx insteadd of renderer.js
+
+-   Update package.json for plugins section. js should use App.tsx insteadd of renderer.js
+
 ```
 "plugins": [
   [
@@ -66,22 +79,30 @@ module.exports = {
   ]
 ]
 ```
-- Create .babelrc file
+
+-   Create .babelrc file
+
 ```
 {
-    "plugins": ["emotion", ["@babel/plugin-transform-runtime",
+    "plugins": [
+        "@babel/proposal-class-properties",
+        "@babel/proposal-object-rest-spread",
+      "emotion", ["@babel/plugin-transform-runtime",
       {
         "regenerator": true
       }
     ]],
-    "presets": ["@babel/preset-react", 
-        "@babel/preset-typescript", 
-        "@emotion/babel-preset-css-prop",
-        ["@babel/env", { "modules": false }]]
+    "presets": [
+              "@babel/env",
+              "@babel/typescript"
+              "@babel/preset-react",
+              "@emotion/babel-preset-css-prop"
+              ]
 }
 ```
 
-- Update index.html
+-   Update index.html
+
 ```
 <!DOCTYPE html>
 <html>
@@ -95,7 +116,9 @@ module.exports = {
   </body>
 </html>
 ```
-- Create a App.tsx in src directory.
+
+-   Create a App.tsx in src directory.
+
 ```
 import React from "react";
 import ReactDOM from "react-dom";
@@ -118,7 +141,9 @@ const App = () => {
 
 ReactDOM.render(<App />, document.getElementById("root"));
 ```
-- Create tsconfig.json
+
+-   Create tsconfig.json
+
 ```
 {
     "compilerOptions": {
@@ -141,7 +166,7 @@ ReactDOM.render(<App />, document.getElementById("root"));
       // "importHelpers": true,                 /* Import emit helpers from 'tslib'. */
       // "downlevelIteration": true,            /* Provide full support for iterables in 'for-of', spread, and destructuring when targeting 'ES5' or 'ES3'. */
       // "isolatedModules": true,               /* Transpile each file as a separate module (similar to 'ts.transpileModule'). */
-  
+
       /* Strict Type-Checking Options */
       "strict": true /* Enable all strict type-checking options. */,
       // "noImplicitAny": true,                 /* Raise error on expressions and declarations with an implied 'any' type. */
@@ -151,13 +176,13 @@ ReactDOM.render(<App />, document.getElementById("root"));
       // "strictPropertyInitialization": true,  /* Enable strict checking of property initialization in classes. */
       // "noImplicitThis": true,                /* Raise error on 'this' expressions with an implied 'any' type. */
       // "alwaysStrict": true,                  /* Parse in strict mode and emit "use strict" for each source file. */
-  
+
       /* Additional Checks */
       // "noUnusedLocals": true,                /* Report errors on unused locals. */
       // "noUnusedParameters": true,            /* Report errors on unused parameters. */
       // "noImplicitReturns": true,             /* Report error when not all code paths in function return a value. */
       // "noFallthroughCasesInSwitch": true,    /* Report errors for fallthrough cases in switch statement. */
-  
+
       /* Module Resolution Options */
       // "moduleResolution": "node",            /* Specify module resolution strategy: 'node' (Node.js) or 'classic' (TypeScript pre-1.6). */
       // "baseUrl": "./",                       /* Base directory to resolve non-absolute module names. */
@@ -168,20 +193,22 @@ ReactDOM.render(<App />, document.getElementById("root"));
       // "allowSyntheticDefaultImports": true,  /* Allow default imports from modules with no default export. This does not affect code emit, just typechecking. */
       "esModuleInterop": true /* Enables emit interoperability between CommonJS and ES Modules via creation of namespace objects for all imports. Implies 'allowSyntheticDefaultImports'. */
       // "preserveSymlinks": true,              /* Do not resolve the real path of symlinks. */
-  
+
       /* Source Map Options */
       // "sourceRoot": "",                      /* Specify the location where debugger should locate TypeScript files instead of source locations. */
       // "mapRoot": "",                         /* Specify the location where debugger should locate map files instead of generated locations. */
       // "inlineSourceMap": true,               /* Emit a single file with source maps instead of having a separate file. */
       // "inlineSources": true,                 /* Emit the source alongside the sourcemaps within a single file; requires '--inlineSourceMap' or '--sourceMap' to be set. */
-  
+
       /* Experimental Options */
       // "experimentalDecorators": true,        /* Enables experimental support for ES7 decorators. */
       // "emitDecoratorMetadata": true,         /* Enables experimental support for emitting type metadata for decorators. */
     }
 }
 ```
-- Update main.js to alllow to access the self signed WEB API
+
+-   Update main.js to alllow to access the self signed WEB API
+
 ```
 app.on(
   "certificate-error",
@@ -193,7 +220,9 @@ app.on(
   }
 );
 ```
-- Update main.js to disable CORS and allow to use Node featre in a renderer process
+
+-   Update main.js to disable CORS and allow to use Node featre in a renderer process
+
 ```
   mainWindow = new BrowserWindow({
     width: 800,
