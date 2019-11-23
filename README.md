@@ -233,3 +233,6 @@ app.on(
     }
   });
 ```
+
+## Babel Typescript loader
+https://github.com/microsoft/TypeScript-Babel-Starter
