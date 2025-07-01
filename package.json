@@ -94,7 +94,7 @@
     "babel-loader": "^8.1.0",
     "babel-plugin-emotion": "^10.0.33",
     "css-loader": "^3.6.0",
-    "electron": "22.3.25",
+    "electron": "28.3.2",
     "node-loader": "^1.0.0",
     "source-map-loader": "^1.0.0",
     "style-loader": "^1.2.1",
