@@ -64,7 +64,7 @@
     }
   },
   "dependencies": {
-    "@babel/runtime": "^7.10.3",
+    "@babel/runtime": "^7.26.10",
     "@emotion/core": "^10.0.28",
     "electron-squirrel-startup": "^1.0.0",
     "react": "^16.13.1",
